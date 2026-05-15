@@ -21,6 +21,18 @@ class Complejo(private var real: Int=0, private var imag: Int=0) {
     fun restar(otro: Complejo): Complejo {
         return Complejo(real - otro.real, imag - otro.imag)
     }
+     fun mult(otro: Complejo): Complejo {
+        val nuevoReal = (real * otro.real) - (imag * otro.imag)
+        val nuevoImag = (real * otro.imag) + (imag * otro.real)
+        return Complejo(nuevoReal, nuevoImag)
+    }
+    fun div(otro: Complejo): Complejo{
+        val denominador = (otro.real * otro.real) + (otro.imag * otro.imag)
+        if (denominador==0) throw ArithmeticException("No se puede dividir por cero")
+        val nuevoReal = (real * otro.real) + (imag * otro.imag)
+        val nuevoImag = (imag * otro.real) - (real * otro.imag)
+        return Complejo(nuevoReal / denominador, nuevoImag / denominador)
+    }
 }
 
 fun main() {
@@ -31,8 +43,14 @@ fun main() {
     var c2:Complejo= Complejo(1,2)
     var c3:Complejo
     var c4:Complejo
+    var c5: Complejo
+    var c6: Complejo
     c3=complejo.sumar(c2)
     c3.mostrar()
     c4=complejo.restar(c2)
     c4.mostrar()
+    c5=complejo.mult(c2)
+    c5.mostrar()
+    c6=complejo.div(c2)
+    c6.mostrar()
 }
